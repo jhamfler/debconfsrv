@@ -1,0 +1,2 @@
+cp .bas* ~
+cp .pro* ~
