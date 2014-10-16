@@ -1,0 +1,173 @@
+#!/bin/bash
+# funktionen
+
+function letztepakete () {
+	ls /var/lib/dpkg/info/ -ltra | grep .list$ | awk '{print $6 " " $7 " " $8 " " $9}' | awk -F. '{print$1 }'
+}
+
+function cs () {
+	clear
+	# only change directory if a directory is specified
+	[ -n "${1}" ] && cd $1
+	# filesystem stats
+	echo "`df -hT .`"
+	echo ""
+	echo -n "[`pwd`:"
+	# count files
+	echo -n " <`find . -maxdepth 1 -mindepth 1 -type f | wc -l | tr -d '[:space:]'` files>"
+	# count sub-directories
+	echo -n " <`find . -maxdepth 1 -mindepth 1 -type d | wc -l | tr -d '[:space:]'` dirs/>"
+	# count links
+	echo -n " <`find . -maxdepth 1 -mindepth 1 -type l | wc -l | tr -d '[:space:]'` links@>"
+	# total disk space used by this directory and all subdirectories
+	echo " <~`du -sh . 2> /dev/null | cut -f1`>]"
+	ROWS=`stty size | cut -d' ' -f1`
+	FILES=`find . -maxdepth 1 -mindepth 1 |
+	wc -l | tr -d '[:space:]'`
+	# if the terminal has enough lines, do a long listing
+	if [ `expr "${ROWS}" - 6` -lt "${FILES}" ]; then
+		ls -ACF
+	else
+		ls -hlAF --full-time
+	fi
+}
+
+
+function mvto {
+  if (( $# == 0 )); then
+    echo "usage: $FUNCNAME datei ziel"
+    return
+  fi
+  mv $1 $2
+  cd $2
+  ll
+}
+
+function cdl {
+  if (( $# == 0 )); then
+    echo "usage: $FUNCNAME pfad/"
+    return
+  fi
+  cd $1
+  ll
+}
+
+function tgz {
+  if (( $# == 0 )); then
+    echo "erstellt ein tar.gz file mit jetzigem Datum aus einem ordner oder mehreren Dateien"
+    echo "usage: $FUNCNAME [Zielname] DIR | FILE {DIR | FILE}"
+    return
+  fi
+  datum="$(date '--rfc-3339=date')"
+  # prüfen ob das letzte zeichen ein / ist
+  g=$(echo -n -- $1 | tail -c 1)
+  if [ "$g" == '/' ] ; then
+    # dann muss es für das Ziel entfernt werden
+    file1="$datum""_""${1%?}"".tar.gz"
+  else
+    file1="$datum""_""$1"".tar.gz"
+  fi
+  if (( $# == 1 )); then
+    if ( [ -f "$1" ] || [ -d "$1" ] ); then
+      tar cvzf $file1 "$1"
+    else
+      echo "abbruch, $1 existiert nicht"
+      return
+    fi
+  else
+    param=
+    for p in $@ ; do
+      if ( ! [ "${1%?}" == "$p" ] || [ "$1" == "$p" ] ); then
+        if ( [ -f "$p" ] || [ -d "$p" ] ); then
+          param=$param$p" "
+        else
+          echo "$p"" wurde ausgeschlossen!"
+        fi
+      fi
+    done
+    if [ "$param" != "" ]; then
+      tar cvzf $file1 $param
+    else
+      echo "keine Dateien zum hinzufügen"
+      return
+    fi
+  fi
+  ls -l --color=auto "$file1"
+  printf "\n"
+  ls --color=auto "$file1"
+}
+
+function 7zip {
+  if (( $# == 0 )); then
+    echo "erstellt ein 7z file mit maximaler Kompression (LZMA) aus einem Ordner oder mehreren Dateien"
+    echo "usage: $FUNCNAME [Zielname] DIR | FILE {DIR | FILE}"
+    return
+  fi
+  # prüfen ob das letzte zeichen ein / ist
+  g=$(echo -n -- $1 | tail -c 1)
+  if [ "$g" == '/' ] ; then
+    # dann muss es für das Ziel entfernt werden
+    file1="${1%?}"".7z"
+  else
+    file1="$1"".7z"
+  fi
+  if (( $# == 1 )); then
+    7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on "$file1" "$1"
+    ls -l --color=auto *.7z
+  else
+    param=
+    for p in $@ ; do
+      echo "p    = ""$p"
+      echo "1    = ""$1"
+      echo "1proz= ""${1%?}"
+      if ( ! [ "${1%?}" == "$p" ] || [ "$1" == "$p" ] ); then
+        param=$param$p" "
+      fi
+    done
+    7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on "$file1" "$param"
+    ls -l --color=auto "$file1"
+  fi
+}
+
+function sucheinworkingdir {
+  if (( $# == 0 )); then
+    echo "usage: $FUNCNAME Suchstring"
+    return
+  fi
+  grep -r -i "$1" ./
+}
+
+function sucheüberall {
+  if (( $# == 0 )); then
+    echo "usage: $FUNCNAME Suchstring"
+    return
+  fi
+  find / -name "$1" -print 2>/dev/null
+#  find / "$1" 2>/dev/null |grep "$1"
+}
+
+function sucheindatei {
+  if (( $# <= 1 )); then
+    echo "usage: $FUNCNAME Dateiname Suchstring"
+    return
+  fi
+  grep -r -t "$2" ./"$1"
+}
+
+function sucheinworkingdirdateiengrößer {
+  if (( $# == 1 )); then
+    ls -lahS $(find -type f -size +"$1"k 2> /dev/null )
+    return
+  fi
+  if (( $# == 0 )); then
+    ls -lahS $(find -type f -size +10000k 2> /dev/null )
+  return
+  fi
+}
+
+function sucheüberalldateiengrößer {
+  if (( $# == 0 )); then
+    ls -lahS $(find / -type f -size +"$1"k 2> /dev/null )
+    return
+  fi
+}
