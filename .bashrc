@@ -89,8 +89,8 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.bashaliases ]; then
+    . ~/.bashaliases
 fi
 
 # egal ob profile oder bashrc geladen wird, beide haengen zusammen
