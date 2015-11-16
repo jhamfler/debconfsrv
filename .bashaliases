@@ -4,9 +4,10 @@
 # listen
 alias ls='ls --color=auto --group-directories-first'
 alias lla='ls -laF'
+alias llh='ls -ldF .[^.]*'
 alias ll='ls -lF'
 alias la='ls -a'
-alias l='ls -CF'
+#alias l='ls -CF'
 
 # apt
 alias search='sudo apt-cache search'
@@ -31,22 +32,24 @@ fi
 # je nach maschine sollte die jeweilige datei vorhanden sein
 
 # aliase für clients
-if [ -f "$HOME/.bash_aliases_clients" ]; then
-   . "$HOME/.bash_aliases_clients"
+if [ -f "$HOME/.bashaliasesclients" ]; then
+   . "$HOME/.bashaliasesclients"
 fi
 
 # aliase für server
-if [ -f "$HOME/.bash_aliases_server" ]; then
-   . "$HOME/.bash_aliases_server"
+if [ -f "$HOME/.bashaliasesserver" ]; then
+   . "$HOME/.bashaliasesserver"
+
 fi
 
 # funktionen für die bash
-if [ -f "$HOME/.bash_func" ]; then
-   . "$HOME/.bash_func"
+if [ -f "$HOME/.bashfunc" ]; then
+   . "$HOME/.bashfunc"
 fi
 
 # wenn laptop
-if [ -f "$HOME/.bash_aliases_laptop" ]; then
-   . "$HOME/.bash_aliases_laptop"
+if [ -f "$HOME/.bashaliaseslaptop" ]; then
+   . "$HOME/.bashaliaseslaptop"
 fi
+
 

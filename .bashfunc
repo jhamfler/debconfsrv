@@ -171,3 +171,34 @@ function sucheüberalldateiengrößer {
     return
   fi
 }
+
+function ggapp {
+  if (( $# > 0 )); then
+    echo "just use: $0, without any parameter"
+    return
+  fi
+  gst
+  echo -n "Do you wish to add all thoose files and commit them? (y/n) "
+  read answer
+  if echo "$answer" | grep -iq "^y" ;then
+    ga -A
+  else
+    break;
+  fi
+  echo "please provide an commit name: "
+  read input
+  while (( -z $input )) do;
+    echo "no input, please provide an commit name: "
+    read input
+  done
+  git commit -m "$input"
+  echo "pull from master:"
+  ggpull
+  echo -n "Do your really want to push? (y/n) "
+  read pushanswer
+  if echo "$pushanswer" | grep -iq "^y" ;then
+    ggpush
+  else
+    break;
+  fi
+}
