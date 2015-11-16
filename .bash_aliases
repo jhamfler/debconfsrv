@@ -23,6 +23,9 @@ alias purge='sudo apt-get purge'
 alias ..='cd .. ; ls -l'
 alias nano='nano --syntax=auto'
 
+if [ $(cat python --version|grep Python) ]; then
+  alias http='python -m SimpleHTTPServer 4321'
+fi
 
 # spezielle aliase für clients oder server
 # je nach maschine sollte die jeweilige datei vorhanden sein
