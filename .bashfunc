@@ -187,7 +187,8 @@ function ggapp {
   fi
   echo "please provide an commit name: "
   read input
-  while (( -z $input )) do;
+  while (( -z $input ))
+  do
     echo "no input, please provide an commit name: "
     read input
   done
