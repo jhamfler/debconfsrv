@@ -16,6 +16,12 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[green]%}●%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg_bold[yellow]%}●%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}●%{$reset_color%}"
 
+bureau_precmd () {
+  _1SPACES=`get_space $_1LEFT $_1RIGHT`
+  print 
+  print -rP "$_1LEFT [%*] $(nvm_prompt_info)$(bureau_git_prompt)"
+}
+
 bureau_git_branch () {
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
@@ -67,22 +73,6 @@ bureau_git_prompt () {
   echo $_result
 }
 
-
-
-if [[ $EUID -eq 0 ]]; then
-  _USERNAME="%{$fg_bold[red]%}%n"
-  _LIBERTY="%{$fg[red]%}#"
-else
-  _USERNAME="%{$fg_bold[cyan]%}%n"
-  _LIBERTY="%{$fg[green]%}$"
-fi
-_USERNAME="$_USERNAME%{$reset_color%}@%{$fg_bold[green]%}%m"
-_LIBERTY="$_LIBERTY%{$reset_color%}"
-
-
-_PATH="%{$fg_bold[yellow]%}[%~] %{$reset_color%}%{$_LIBERTY%}"
-
-
 get_space () {
   local STR=$1$2
   local zero='%([BSUbfksu]|([FB]|){*})'
@@ -98,16 +88,26 @@ get_space () {
   echo $SPACES
 }
 
-_1LEFT="$_USERNAME $_PATH"
-_1RIGHT="$(nvm_prompt_info) $(bureau_git_prompt) [%*]"
 
-bureau_precmd () {
-  _1SPACES=`get_space $_1LEFT $_1RIGHT`
-  print 
-  print -rP "$_1LEFT$_1SPACES$_1RIGHT"
-}
+if [[ $EUID -eq 0 ]]; then
+  _USERNAME="%{$fg_bold[red]%}%n"
+  _LIBERTY="%{$fg[red]%}#"
+else
+  _USERNAME="%{$fg_bold[cyan]%}%n"
+  _LIBERTY="%{$fg[green]%}$"
+fi
+_USERNAME="$_USERNAME%{$reset_color%}@%{$fg_bold[green]%}%m"
+_LIBERTY="$_LIBERTY%{$reset_color%}"
+
+
+_PATH="%{$fg_bold[yellow]%}[%~] %{$reset_color%}%{$_LIBERTY%}"
 
 setopt prompt_subst
+
+_1LEFT="$_USERNAME $_PATH"
+_1RIGHT="$(nvm_prompt_info) $(bureau_git_prompt)     [%*]"
+
+
 PROMPT=''
 RPROMPT=''
 
