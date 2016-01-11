@@ -18,7 +18,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}●%{$reset_color%}"
 
 bureau_precmd () {
   _1SPACES=`get_space $_1LEFT $_1RIGHT`
-  print 
+#  print 
   print -rP "$_1LEFT [%*] $(nvm_prompt_info)$(bureau_git_prompt)"
 }
 
@@ -109,7 +109,7 @@ _1RIGHT="$(nvm_prompt_info) $(bureau_git_prompt)     [%*]"
 
 
 PROMPT=''
-RPROMPT=''
+#RPROMPT=''
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd bureau_precmd
