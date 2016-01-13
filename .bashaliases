@@ -28,6 +28,9 @@ if [ $(cat python --version|grep Python) ]; then
   alias http='python -m SimpleHTTPServer 4321'
 fi
 
+#ipfs
+home1=QmdN52jyoBBRHnZ1pfBh2KVN77ivnAa82KJZNGGJPAzDLx
+
 # spezielle aliase für clients oder server
 # je nach maschine sollte die jeweilige datei vorhanden sein
 
