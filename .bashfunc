@@ -60,8 +60,8 @@ function tgz {
   fi
   datum="$(date '--rfc-3339=date')"
   # prüfen ob das letzte zeichen ein / ist
-  g=$(echo -n -- $1 | tail -c 1)
-  if [ "$g" == '/' ] ; then
+  g=$(echo "$1" | rev | cut -c1 )
+  if [[ "$g" == '/' ]] ; then
     # dann muss es für das Ziel entfernt werden
     file1="$datum""_""${1%?}"".tar.gz"
   else
@@ -81,7 +81,7 @@ function tgz {
         if ( [ -f "$p" ] || [ -d "$p" ] ); then
           param=$param$p" "
         else
-          echo "$p"" wurde ausgeschlossen!"
+          echo "$p"' wurde ausgeschlossen!'
         fi
       fi
     done
