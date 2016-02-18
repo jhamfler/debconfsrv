@@ -69,7 +69,7 @@ function tgz {
   fi
   if (( $# == 1 )); then
     if ( [ -f "$1" ] || [ -d "$1" ] ); then
-      tar cvzf $file1 "$1"
+      tar cvzf "$file1" "$1"
     else
       echo "abbruch, $1 existiert nicht"
       return
@@ -79,14 +79,14 @@ function tgz {
     for p in $@ ; do
       if ( ! [ "${1%?}" == "$p" ] || [ "$1" == "$p" ] ); then
         if ( [ -f "$p" ] || [ -d "$p" ] ); then
-          param=$param$p" "
+          param="$param""$p"" "
         else
-          echo "$p"' wurde ausgeschlossen!'
+          echo "$p"" wurde ausgeschlossen!"
         fi
       fi
     done
     if [ "$param" != "" ]; then
-      tar cvzf $file1 $param
+      tar cvzf "$file1" "$param"
     else
       echo "keine Dateien zum hinzufügen"
       return
