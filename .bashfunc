@@ -121,7 +121,7 @@ function 7zip {
       echo "1    = ""$1"
       echo "1proz= ""${1%?}"
       if ( ! [ "${1%?}" == "$p" ] || [ "$1" == "$p" ] ); then
-        param=$param$p" "
+        param="$param""$p"" "
       fi
     done
     7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on "$file1" "$param"
@@ -187,7 +187,7 @@ function ggapp {
   fi
   echo "please provide an commit name: "
   read input
-  while (( -z $input ))
+  while [[ -z "$input" ]]
   do
     echo "no input, please provide an commit name: "
     read input
