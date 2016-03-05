@@ -21,7 +21,7 @@ alias autoclean='sudo apt-get autoclean'
 alias purge='sudo apt-get purge'
 
 # taegliche nutzung
-alias ..='cd .. ; ls -l'
+alias ..='cd .. ; ls -l ;'
 alias nano='nano --syntax=auto'
 
 if [ $(cat python --version|grep Python) ]; then

@@ -104,8 +104,8 @@ function 7zip {
     return
   fi
   # prüfen ob das letzte zeichen ein / ist
-  g=$(echo -n -- $1 | tail -c 1)
-  if [ "$g" == '/' ] ; then
+  g=$(echo "$1" | rev | cut -c1 )
+  if [[ "$g" == '/' ]] ; then
     # dann muss es für das Ziel entfernt werden
     file1="${1%?}"".7z"
   else
