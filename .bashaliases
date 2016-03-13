@@ -21,11 +21,11 @@ alias autoclean='sudo apt-get autoclean'
 alias purge='sudo apt-get purge'
 
 # taegliche nutzung
-alias ..='cd .. ; ls -l'
+alias ..='cd .. ; ls -l ;'
 alias nano='nano --syntax=auto'
 
 if [ $(cat python --version|grep Python) ]; then
-  alias http='python -m SimpleHTTPServer 4321'
+  alias http='python -m SimpleHTTPServer 55555'
 fi
 
 #ipfs
@@ -54,5 +54,3 @@ fi
 if [ -f "$HOME/.bashaliaseslaptop" ]; then
    . "$HOME/.bashaliaseslaptop"
 fi
-
-
