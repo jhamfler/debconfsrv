@@ -3,10 +3,9 @@
 
 function fingerprints () {
         hostname
-        a=$(ls -1 /etc/ssh/*.pub)
-        for i in $a
+        for file in /etc/ssh/*.pub
         do
-                ssh-keygen -lf "$i"
+                ssh-keygen -l -f "${file}"
         done
 }
 
