@@ -3,10 +3,10 @@
 
 # listen
 alias ls='ls --color=auto --group-directories-first'
-alias lla='ls -laF'
-alias llh='ls -ldF .[^.]*'
-alias ll='ls -lF'
-alias la='ls -a'
+alias lla='ls -laF  --color=auto --group-directories-first'
+alias llh='ls -ldF .[^.]* --color=auto --group-directories-first'
+alias ll='ls -lF --color=auto --group-directories-first'
+alias la='ls -a --color=auto --group-directories-first'
 #alias l='ls -CF'
 
 # apt
@@ -23,6 +23,7 @@ alias purge='sudo apt-get purge'
 # taegliche nutzung
 alias ..='cd .. ; ls -l ;'
 alias nano='nano --syntax=auto'
+alias gencsr='openssl req -new -nodes -keyout server.key -out server.csr -newkey rsa:4096'
 
 if [ $(cat python --version|grep Python) ]; then
   alias http='python -m SimpleHTTPServer 55555'
