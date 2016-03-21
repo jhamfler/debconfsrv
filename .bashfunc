@@ -1,6 +1,10 @@
 #!/bin/bash
 # funktionen
 
+function grin () {
+	grep -rin "$1" .
+}
+
 function fingerprints () {
         hostname
         for file in /etc/ssh/*.pub
