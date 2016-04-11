@@ -2,7 +2,12 @@
 # funktionen
 
 function grin () {
-	grep -rin "$1" .
+	if (( $# == 0 ))
+	then
+		echo "There is at least one argument required."
+		exit
+	fi
+	grep -rin "$@"
 }
 
 function fingerprints () {
@@ -141,12 +146,17 @@ function 7zip {
   fi
 }
 
-function sucheinworkingdir {
-  if (( $# == 0 )); then
-    echo "usage: $FUNCNAME Suchstring"
-    return
+function suche {
+  if   (( $# == 0 )); then
+    echo "usage: $FUNCNAME [dir/subdir] part-of-filename"
+  elif (( $# == 1 )); then
+    find . -iname "*$1*"
+  elif (( $# == 2 )); then
+    find "$1" -iname "*$2*"
+  else
+    echo "too many arguments"
+    echo "usage: $FUNCNAME [dir/subdir] part-of-filename"
   fi
-  grep -r -i "$1" ./
 }
 
 function sucheüberall {
