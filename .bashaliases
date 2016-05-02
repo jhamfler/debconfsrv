@@ -23,9 +23,12 @@ alias purge='sudo apt-get purge'
 # taegliche nutzung
 alias ..='cd .. && ls -l ;'
 alias nano='nano --syntax=auto'
-alias gencsr='openssl req -new -nodes -keyout server.key -out server.csr -newkey rsa:4096'
 
-if [ $(cat python --version|grep Python) ]; then
+# hard to remmber commands
+alias gencsr='openssl req -new -nodes -keyout server.key -out server.csr -newkey rsa:4096'
+alias greth="ip -4 a s eth0 primary up | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | awk 'NR==1{print $1}'"
+
+if [ -n $(python --version|grep Python) ]; then
   alias http='python -m SimpleHTTPServer 55555'
 fi
 
