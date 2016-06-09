@@ -94,7 +94,7 @@ function tgz {
   else
     param=
     for p in $@ ; do
-      if ( ! [ "${1%?}" == "$p" ] || [ "$1" == "$p" ] ); then
+      if ( ! [[ "${1%?}" == "$p" ]] || [[ "$1" == "$p" ]] ); then
         if ( [ -f "$p" ] || [ -d "$p" ] ); then
           param="$param""$p"" "
         else
