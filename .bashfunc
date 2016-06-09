@@ -1,6 +1,21 @@
 #!/bin/bash
 # funktionen
 
+function fastscan () {
+	if (( $# >= 2 ))
+	then
+		echo "usage: $FUNCNAME [ip[/mask]]"
+		echo "example: $FUNCNAME"
+		echo "example: $FUNCNAME 192.168.0.1/24"
+	fi
+	if (( $# == 0 ))
+        then
+		nmap -T5 -sP --max-hostgroup 50 --min-rate 100000 `greth`/24
+	else
+		nmap -T5 -sP --max-hostgroup 50 --min-rate 100000 "$1"
+	fi
+}
+
 function grin () {
 	if (( $# == 0 ))
 	then
