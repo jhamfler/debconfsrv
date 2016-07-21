@@ -1,6 +1,31 @@
 #!/bin/bash
 # funktionen
 
+function grepa(){
+	for x in `/sbin/ifconfig |egrep -v "^ "| awk '{print $1}'`
+	do
+		count=${#x//:}
+		echo -n ${x//:}
+		if   [[ $count -gt 7 ]]; then
+			echo -n "\t"
+		elif [[ $count -lt 8 ]]; then
+			echo -n "\t\t"
+		fi
+		echo -n $(ip -4 a s ${x//:} up | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | grep -m1 '.*')
+		echo ""
+	done
+}
+
+function greth(){
+        for x in `/sbin/ifconfig |egrep -v "^ "| awk '{print $1}'`
+	do
+                iface=${x//:}
+                if [[ $(echo "$iface" | grep -o "^e") ]]; then
+                        echo $(ip -4 a s ${x//:} up | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | grep -m1 '.*')
+                fi
+        done
+}
+
 function fastscan () {
 	if (( $# >= 2 ))
 	then
