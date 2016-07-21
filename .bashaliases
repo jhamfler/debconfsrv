@@ -31,7 +31,7 @@ alias greth="ip -4 a s eth0 up | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-
 alias genssh='ssh-keygen -b 8192 -t rsa'
 alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
 
-if [ -n $(python --version|grep -q Python) ]; then
+if python --version 2>&1|grep -q Python ;then
   alias http='python -m SimpleHTTPServer 55555'
 fi
 
