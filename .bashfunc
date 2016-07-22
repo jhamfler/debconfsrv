@@ -54,7 +54,7 @@ function fingerprints () {
         hostname
         for file in /etc/ssh/*.pub
         do
-                ssh-keygen -l -f "${file}" -E md5
+                ssh-keygen -l -f "${file}" -E md5 2>/dev/null
                 ssh-keygen -l -f "${file}" # std: sha256 when new version
         done
 }
