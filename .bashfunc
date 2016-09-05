@@ -52,10 +52,22 @@ function grin () {
 
 function fingerprints () {
         hostname
+	opte="yes"
+	if ssh-keygen -E 2>&1 | grep -q "unknown option"
+	then
+		opte="no"
+	fi
         for file in /etc/ssh/*.pub
         do
-                ssh-keygen -l -f "${file}" -E md5 2>/dev/null
-                ssh-keygen -l -f "${file}" # std: sha256 when new version
+		if [[ "$opte" == "yes" ]]
+		then
+			ssh-keygen -l -f "${file}" -E md5 2>/dev/null
+	                ssh-keygen -l -f "${file}" # std: sha256 when new version
+		else
+			ssh-keygen -l -f "${file}" # std: md5    when old version
+			a=$(awk '{print $(NF-1)}' "${file}" | base64 -d 2>/dev/null | sha256sum -b | awk '{print $1}' | xxd -r -p | base64)
+                        echo $(ssh-keygen -l -f "${file}") | awk -v var="$a" '{print $1, var, $3, $4}'
+		fi
         done
 }
 
