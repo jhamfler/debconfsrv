@@ -46,13 +46,18 @@ if [ -f "$HOME/.bashaliasesclients" ]; then
    . "$HOME/.bashaliasesclients"
 fi
 
+# funktionen für clients
+if [ -f "$HOME/.bashfuncclients" ]; then
+   . "$HOME/.bashfuncclients"
+fi
+
 # aliase für server
 if [ -f "$HOME/.bashaliasesserver" ]; then
    . "$HOME/.bashaliasesserver"
 
 fi
 
-# funktionen für die bash
+# funktionen für die bash/zsh
 if [ -f "$HOME/.bashfunc" ]; then
    . "$HOME/.bashfunc"
 fi
