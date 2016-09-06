@@ -98,5 +98,5 @@ else
 fi
 
 # display an ls -lh when no command is executed (just pressing enter)
-export PROMPT_COMMAND='h=$(fc -l -1); h=${h%% *}; (( h != oh )) || ls -lh; oh=$h' 
-precmd() { eval "$PROMPT_COMMAND" }
+#export PROMPT_COMMAND='h=$(fc -l -1); h=${h%% *}; (( h != oh )) || ls -lh; oh=$h' 
+#precmd() { eval "$PROMPT_COMMAND" }
