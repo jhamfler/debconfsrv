@@ -45,9 +45,9 @@ function grin () {
 	if (( $# == 0 ))
 	then
 		echo "There is at least one argument required."
-		exit
+	else
+		grep -rin "$@"
 	fi
-	grep -rin "$@"
 }
 
 function fingerprints () {
