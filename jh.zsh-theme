@@ -100,7 +100,7 @@ _USERNAME="$_USERNAME%{$reset_color%}@%{$fg_bold[green]%}%m"
 _LIBERTY="$_LIBERTY%{$reset_color%}"
 
 
-_PATH="%{$fg_bold[yellow]%}$(pwd) %{$reset_color%}%{$_LIBERTY%}"
+_PATH="%{$fg_bold[yellow]%}%d %{$reset_color%}%{$_LIBERTY%}"
 
 setopt prompt_subst
 
