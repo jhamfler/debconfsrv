@@ -23,6 +23,7 @@ alias purge='sudo apt-get purge'
 # taegliche nutzung
 alias ..='cd .. && ls -l ;'
 alias nano='nano --syntax=auto'
+alias greps='ps aux|grep '
 
 # hard to remmber commands
 alias gencsr='openssl req -new -nodes -keyout server.key -out server.csr -newkey rsa:4096'
