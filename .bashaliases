@@ -21,7 +21,7 @@ alias autoclean='sudo apt-get autoclean'
 alias purge='sudo apt-get purge'
 
 # taegliche nutzung
-alias ..='cd .. && ls -l ;'
+alias ..='cd .. && ls -lF --group-directories-first;'
 alias nano='nano --syntax=auto'
 alias greps='ps aux|grep '
 
@@ -47,13 +47,18 @@ if [ -f "$HOME/.bashaliasesclients" ]; then
    . "$HOME/.bashaliasesclients"
 fi
 
+# funktionen für clients
+if [ -f "$HOME/.bashfuncclients" ]; then
+   . "$HOME/.bashfuncclients"
+fi
+
 # aliase für server
 if [ -f "$HOME/.bashaliasesserver" ]; then
    . "$HOME/.bashaliasesserver"
 
 fi
 
-# funktionen für die bash
+# funktionen für die bash/zsh
 if [ -f "$HOME/.bashfunc" ]; then
    . "$HOME/.bashfunc"
 fi
