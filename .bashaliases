@@ -62,3 +62,5 @@ fi
 if [ -f "$HOME/.bashaliaseslaptop" ]; then
    . "$HOME/.bashaliaseslaptop"
 fi
+
+export PATH=$HOME/bin:$PATH
