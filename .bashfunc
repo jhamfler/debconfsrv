@@ -219,9 +219,9 @@ function suche {
   if   (( $# == 0 )); then
     echo "usage: $FUNCNAME [dir/subdir] part-of-filename"
   elif (( $# == 1 )); then
-    find . -iname "*$1*"
+    find . -iname "*$1*" 2>/dev/null
   elif (( $# == 2 )); then
-    find "$1" -iname "*$2*"
+    find "$1" -iname "*$2*" 2>/dev/null
   else
     echo "too many arguments"
     echo "usage: $FUNCNAME [dir/subdir] part-of-filename"
