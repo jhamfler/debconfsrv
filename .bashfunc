@@ -66,8 +66,17 @@ function grin () {
 	fi
 }
 
+function fingerprint () {
+	if (( $# == 1 ))
+	then
+		openssl x509 -in "$1" -noout -sha256 -fingerprint
+	else
+		echo "usage: $FUNCNAME certificate.crt"
+	fi
+}
+
 function fingerprints () {
-        hostname
+	hostname
 	opte="yes"
 	if ssh-keygen -E 2>&1 | grep -q "unknown option"
 	then
