@@ -1,6 +1,15 @@
 #!/bin/bash
 # funktionen
 
+function grin () {
+	if (( $# == 0 ))
+	then
+		echo "There is at least one argument required."
+	else
+		grep -rin $@
+	fi
+}
+
 function grepa(){
 	for x in `/sbin/ifconfig |egrep -v "^ "| awk '{print $1}'`
 	do
@@ -56,18 +65,32 @@ function slowscan () {
         fi
 }
 
+function fullscan () {
+	if (( $# >= 2 ))
+        then
+                echo "usage: $FUNCNAME [ip|hostname]"
+                echo "example: $FUNCNAME localhost"
+                echo "example: $FUNCNAME 192.168.0.1"
+        fi
+        if (( $# == 0 ))
+        then
+			sudo nmap -n -PN -sT -sU -p- localhost
+        else
+			sudo nmap -n -PN -sT -sU -p- "$1"
+        fi
+}
 
-function grin () {
-	if (( $# == 0 ))
+function fingerprint () {
+	if (( $# == 1 ))
 	then
-		echo "There is at least one argument required."
+		openssl x509 -in "$1" -noout -sha256 -fingerprint
 	else
-		grep -rin "$@"
+		echo "usage: $FUNCNAME certificate.crt"
 	fi
 }
 
 function fingerprints () {
-        hostname
+	hostname
 	opte="yes"
 	if ssh-keygen -E 2>&1 | grep -q "unknown option"
 	then

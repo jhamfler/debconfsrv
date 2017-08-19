@@ -1,0 +1,24 @@
+# lege Paketmanager fest
+if [ "$(grep -io debian /proc/version)" ]; then
+	# apt
+	alias search='sudo apt-cache search'
+	alias pinstall='sudo apt-get install'
+	alias update='sudo apt-get update'
+	alias upgrade='sudo apt-get upgrade'
+	alias upall='sudo apt-get update && ( sudo apt-get upgrade && sudo apt-get dist-upgrade )'
+	alias remove='sudo apt-get remove'
+	alias autoremove='sudo apt-get autoremove'
+	alias autoclean='sudo apt-get autoclean'
+	alias purge='sudo apt-get purge'
+fi
+if [ "$(grep -io arch /proc/version)" ]; then
+	alias search='pacman -Ss'
+	alias pinstall='sudo pacman -S'
+	alias update='sudo pacman -Sy'
+	alias upgrade='sudo pacman -Su'
+	alias upall='sudo pacman -Syu'
+	alias remove='sudo pacman -R'
+	alias autoremove='sudo pacman -Rsn `pacman -Qdtq`'
+	alias autoclean='sudo pacman -Sc'
+fi
+
