@@ -5,7 +5,7 @@
 alias ls='ls --color=auto --group-directories-first'
 alias lla='ls -laF  --color=auto --group-directories-first'
 alias llh='ls -ldF .[^.]* --color=auto --group-directories-first'
-alias ll='ls -lF --color=auto --group-directories-first'
+alias ll='ls -lhF --color=auto --group-directories-first'
 alias la='ls -a --color=auto --group-directories-first'
 #alias l='ls -CF'
 
