@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/jh/.oh-my-zsh
+export ZSH=/home/$USER/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -41,6 +41,8 @@ COMPLETION_WAITING_DOTS="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
+HISTSIZE=10000000
+SAVEHIST=10000000
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -100,3 +102,5 @@ fi
 # display an ls -lh when no command is executed (just pressing enter)
 #export PROMPT_COMMAND='h=$(fc -l -1); h=${h%% *}; (( h != oh )) || ls -lh; oh=$h' 
 #precmd() { eval "$PROMPT_COMMAND" }
+
+export PATH="$HOME/bin:$PATH"
