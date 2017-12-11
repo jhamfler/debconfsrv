@@ -5,7 +5,7 @@ if [ "$(grep -io arch /proc/version)" ]; then
 	alias pinstall='sudo pacman -S'
 	alias update='sudo pacman -Sy'
 	alias upgrade='sudo pacman -Su'
-	alias upall='sudo pacman -Syu'
+	alias upall='sudo pacman -Syuu'
 	alias remove='sudo pacman -R'
 	alias autoremove='sudo pacman -Rsn `pacman -Qdtq`'
 	alias autoclean='sudo pacman -Sc'
@@ -21,4 +21,3 @@ else # [ "$(grep -io debian /proc/version)" ]; then
 	alias autoclean='sudo apt-get autoclean'
 	alias purge='sudo apt-get purge'
 fi
-
