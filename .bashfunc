@@ -10,7 +10,7 @@ function grin () {
 	fi
 }
 
-function grepa(){
+function grepa () {
 	for x in `/sbin/ifconfig |egrep -v "^ "| awk '{print $1}'`
 	do
 		count=${#x//:}
@@ -25,14 +25,17 @@ function grepa(){
 	done
 }
 
-function greth(){
-        for x in `/sbin/ifconfig |egrep -v "^ "| awk '{print $1}'`
-	do
-                iface=${x//:}
-                if [[ $(echo "$iface" | grep -o "^e") ]]; then
-                        echo $(ip -4 a s ${x//:} up | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | grep -m1 '.*')
-                fi
-        done
+function greth () {
+	echo $(ip -4 a| grep ": e" -A 1|grep inet | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | grep -m1 '.*')
+}
+
+function grip () {
+	ip=$(ip -4 a| grep ": e" -A 1|grep inet | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | grep -m1 '.*')
+	if [[ "$ip" == "" ]]
+	then
+		ip=$(ip -4 a| grep ": w" -A 1|grep inet | grep -Eo '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])' | grep -m1 '.*')
+	fi
+	echo "$ip"
 }
 
 function fastscan () {
@@ -44,7 +47,7 @@ function fastscan () {
 	fi
 	if (( $# == 0 ))
         then
-		nmap -T5 -sP --max-hostgroup 50 --min-rate 100000 `greth`/24
+		nmap -T5 -sP --max-hostgroup 50 --min-rate 100000 `grip`/24
 	else
 		nmap -T5 -sP --max-hostgroup 50 --min-rate 100000 "$1"
 	fi
