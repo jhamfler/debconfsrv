@@ -1,6 +1,16 @@
 #!/bin/bash
 # funktionen
 
+function copyinorder () {
+	if (( $# == 0 ))
+    then
+        echo "Usage: $FUNCNAME target/dir"
+		echo "copies files from local directory to targetdirectory in alphabetical order"
+    else
+		find . -print0 | sort -z | xargs -0 cp --parents --target-directory="$1"
+	fi
+}
+
 function grin () {
 	if (( $# == 0 ))
 	then
