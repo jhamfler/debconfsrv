@@ -1,6 +1,25 @@
 #!/bin/bash
 # funktionen
 
+function convertflactomp3parallel () {
+    if (( $# < 2 ))
+    then
+        echo "Usage: $FUNCNAME source/dir target/dir"
+        echo "converts flac files from source directory to target directory in parallel"
+        echo "it keeps the directory structure"
+    else
+        if command -v parallel 2>/dev/null
+        then
+            sourcedir="$1"
+            targetdir="$2"
+            files=$(find "$sourcedir" -type f -iname \*.flac)
+            parallel 's={1}; t={3}${s#{2}}; t=${t[@]/%flac/mp3}; td=$(dirname "${t}"); if [ ! -d "$td" ]; then mkdir -p "$td"; fi; ffmpeg -i $s -codec:a libmp3lame -ab 192k -map_metadata 0 -id3v2_version 3 -write_id3v1 1 $t' ::: $files ::: $sourcedir ::: $targetdir
+        else
+            echo "GNU parallel isn't installed"
+        fi
+    fi
+}
+
 function copyinorder () {
 	if (( $# == 0 ))
     then
