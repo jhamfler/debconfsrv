@@ -13,6 +13,7 @@ alias la='ls -a --color=auto --group-directories-first'
 alias ..='cd .. && ls -lhF --color=auto --group-directories-first;'
 alias nano='nano --syntax=auto'
 alias greps='ps aux|grep '
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # hard to remmber commands
 alias gencsr='openssl req -new -nodes -keyout server.key -out server.csr -newkey rsa:4096'
