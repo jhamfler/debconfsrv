@@ -104,3 +104,4 @@ fi
 #precmd() { eval "$PROMPT_COMMAND" }
 
 export PATH="$HOME/bin:$PATH"
+export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
