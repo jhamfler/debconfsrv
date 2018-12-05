@@ -61,20 +61,21 @@ export PATH="/home/jh/local/bin:/home/jh/local/bin:/usr/lib/pycharm302/bin:/home
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=de_DE.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+#if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+#else
+#  export EDITOR='mvim'
+#fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -89,7 +90,6 @@ if [ -f ~/.bashaliases ]; then
     . ~/.bashaliases
 fi
 
-
 #ls color 
 
 if [[ -x "`whence -p dircolors`" ]]; then
@@ -102,6 +102,9 @@ fi
 # display an ls -lh when no command is executed (just pressing enter)
 #export PROMPT_COMMAND='h=$(fc -l -1); h=${h%% *}; (( h != oh )) || ls -lh; oh=$h' 
 #precmd() { eval "$PROMPT_COMMAND" }
+
+export READER="zathura"
+export BIB="$HOME/git/fun-arch-thesis/latex/bib.bib"
 
 export PATH="$HOME/bin:$PATH"
 export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
