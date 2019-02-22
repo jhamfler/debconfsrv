@@ -51,7 +51,7 @@ SAVEHIST=10000000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git kubectl zsh-autosuggestions)
 
 # User configuration
 
@@ -90,7 +90,7 @@ if [ -f ~/.bashaliases ]; then
     . ~/.bashaliases
 fi
 
-#ls color 
+#ls color
 
 if [[ -x "`whence -p dircolors`" ]]; then
   eval `dircolors`
@@ -100,11 +100,14 @@ else
 fi
 
 # display an ls -lh when no command is executed (just pressing enter)
-#export PROMPT_COMMAND='h=$(fc -l -1); h=${h%% *}; (( h != oh )) || ls -lh; oh=$h' 
+#export PROMPT_COMMAND='h=$(fc -l -1); h=${h%% *}; (( h != oh )) || ls -lh; oh=$h'
 #precmd() { eval "$PROMPT_COMMAND" }
+
+
 
 export READER="zathura"
 export BIB="$HOME/git/fun-arch-thesis/latex/bib.bib"
 
 export PATH="$HOME/bin:$PATH"
 export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
+
