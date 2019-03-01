@@ -104,10 +104,14 @@ fi
 #precmd() { eval "$PROMPT_COMMAND" }
 
 
-
-export READER="zathura"
 export BIB="$HOME/git/fun-arch-thesis/latex/bib.bib"
-
-export PATH="$HOME/bin:$PATH"
-export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
+if [ ! -z "$(which zathura)" ]; then
+	export READER="zathura"
+fi
+if [ -d "$HOME/bin:$PATH" ]; then
+	export PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.scripts" ]; then
+	export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
+fi
 
