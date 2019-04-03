@@ -22,9 +22,13 @@ alias gencrt='openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.
 alias genssh='ssh-keygen -b 8192 -t rsa'
 alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
 
+# utility
 if python --version 2>&1|grep -q Python ;then
   alias http='python -m SimpleHTTPServer 55555'
 fi
+
+# download youtube audio
+dla="youtube-dl -x --audio-format best -o '%(title)s.%(ext)s'"
 
 #ipfs
 home1=QmdN52jyoBBRHnZ1pfBh2KVN77ivnAa82KJZNGGJPAzDLx
