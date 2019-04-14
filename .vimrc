@@ -28,6 +28,10 @@ au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 " leader ändern
 let mapleader=" "
 
+" set tab width
+set shiftwidth=2
+set tabstop=2
+
 " utf-8 + links nummern
 set encoding=utf-8
 set number relativenumber
