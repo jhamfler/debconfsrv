@@ -39,6 +39,9 @@ set number relativenumber
 " highlight suche
 " * unter einem wort sucht andere vorkommen
 set hlsearch
+" unhighlight mit CTRL-L
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
 
 " codeklammern falten
 " öffnen: zo, schließen: zc, ...
