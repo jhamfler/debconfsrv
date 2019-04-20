@@ -48,6 +48,9 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 :syn region myFold start="\#IF" end="\#ENDIF" transparent fold
 :syn sync fromstart
 :setlocal foldmethod=syntax
+" fold color
+:hi Folded ctermfg=0
+:hi Folded ctermbg=7
 
 " zeilen umbrechen am wortende
 set tw=0 wrap linebreak
