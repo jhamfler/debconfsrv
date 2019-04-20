@@ -44,7 +44,9 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 
 " codeklammern falten
-" öffnen: zo, schließen: zc, ...
+" öffnen: zo, schließen: zc, toggle: za, alle öffnen zR, ...
+:syn region myFold start="\#IF" end="\#ENDIF" transparent fold
+:syn sync fromstart
 :setlocal foldmethod=syntax
 
 " zeilen umbrechen am wortende
