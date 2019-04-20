@@ -194,6 +194,7 @@ function cdl {
   cd $1
   ll
 }
+compdef cdl=cd
 
 function tgz {
   if (( $# == 0 )); then
