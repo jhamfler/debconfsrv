@@ -22,6 +22,7 @@ alias gencrt='openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.
 alias gensshrsa='ssh-keygen -b 8192 -t rsa'
 alias gensshed='ssh-keygen -t ed25519 -a 100'
 alias clearcache='sudo bash -c "free && sync && echo 3 > /proc/sys/vm/drop_caches && free"'
+alias yadm="yadm -Y $HOME/git/dotfiles"
 
 # utility
 if python --version 2>&1|grep -q Python ;then
