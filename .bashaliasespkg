@@ -1,5 +1,5 @@
 # lege Paketmanager fest
-if [ "$(grep -io arch /proc/version)" ]; then
+if [ "$(grep -io -e arch -e manjaro /proc/version)" ]; then
 	# pacman
 	alias search='pacman -Ss'
 	alias pinstall='sudo pacman -S'
@@ -9,7 +9,7 @@ if [ "$(grep -io arch /proc/version)" ]; then
 	alias remove='sudo pacman -R'
 	alias autoremove='sudo pacman -Rsn `pacman -Qdtq`'
 	alias autoclean='sudo pacman -Sc'
-else # [ "$(grep -io debian /proc/version)" ]; then
+else # [ "$(grep -io -e debian -e ubuntu /proc/version)" ]; then
 	# apt
 	alias search='sudo apt-cache search'
 	alias pinstall='sudo apt-get install'
