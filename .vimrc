@@ -52,6 +52,9 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 :hi Folded ctermfg=0
 :hi Folded ctermbg=7
 
+" tabs und newline anzeigen
+map <leader>l :set list!<CR>:set listchars=eol:¬,tab:▸\<CR>
+
 " zeilen umbrechen am wortende
 set tw=0 wrap linebreak
 
